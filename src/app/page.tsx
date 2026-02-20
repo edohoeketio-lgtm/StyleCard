@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
-import { FadeUp, StaggerChildren } from "@/components/motion/MotionWrapper"
+import { FadeUp, StaggerChildren, ParallaxScroll } from "@/components/motion/MotionWrapper"
 import { PillButton } from "@/components/ui/PillButton"
 import { MediaCard } from "@/components/ui/MediaCard"
 import { HorizontalGallery } from "@/components/motion/HorizontalGallery"
@@ -16,7 +16,7 @@ export default function Home() {
           <FadeUp>
             <h1 className="text-[56px] md:text-[88px] leading-[1.05] tracking-[-0.05em] font-semibold text-balance mb-24 max-w-5xl text-primary">
               Extract the exact <br className="hidden md:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-black to-accent/80">Style DNA</span> of any website.
+              <span className="text-black">Style DNA</span> of any website.
             </h1>
           </FadeUp>
           <FadeUp delay={0.1}>
@@ -34,28 +34,30 @@ export default function Home() {
             </Link>
           </FadeUp>
 
-          <FadeUp delay={0.3} className="w-full max-w-[1200px] mt-[64px] relative perspective-1000">
-            {/* Dramatic Floating Hero Showpiece */}
-            <div className="w-full aspect-[16/10] md:aspect-[21/9] rounded-[32px] overflow-hidden relative shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)] border border-white/60 bg-white/40 backdrop-blur-3xl flex items-center justify-center p-8 transition-transform duration-[1500ms] hover:scale-[1.01] hover:-translate-y-2 group">
-              <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white to-transparent opacity-80" />
-              <div className="w-full h-full rounded-[24px] overflow-hidden flex flex-col bg-[#F5F5F7] shadow-inner relative">
+          <FadeUp delay={0.3} className="w-full max-w-[1200px] mt-[64px] perspective-1000">
+            <ParallaxScroll offset={50} className="relative">
+              {/* Dramatic Floating Hero Showpiece */}
+              <div className="w-full aspect-[16/10] md:aspect-[21/9] rounded-[32px] overflow-hidden relative shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)] border border-white/60 bg-white/40 backdrop-blur-3xl flex items-center justify-center p-8 transition-transform duration-[1500ms] hover:scale-[1.01] hover:-translate-y-2 group">
+                <div className="absolute inset-x-0 top-0 h-[1px] bg-white/80 opacity-80" />
+                <div className="w-full h-full rounded-[24px] overflow-hidden flex flex-col bg-[#F5F5F7] shadow-inner relative">
 
-                {/* Simulated macOS Header */}
-                <div className="h-[48px] bg-white/80 backdrop-blur-md border-b border-black/5 flex items-center px-[24px] gap-8 shrink-0">
-                  <div className="w-3 h-3 rounded-full bg-black/10 group-hover:bg-[#FF5F56] transition-colors duration-fast" />
-                  <div className="w-3 h-3 rounded-full bg-black/10 group-hover:bg-[#FFBD2E] transition-colors duration-fast delay-75" />
-                  <div className="w-3 h-3 rounded-full bg-black/10 group-hover:bg-[#27C93F] transition-colors duration-fast delay-150" />
-                </div>
+                  {/* Simulated macOS Header */}
+                  <div className="h-[48px] bg-white/80 backdrop-blur-md border-b border-black/5 flex items-center px-[24px] gap-8 shrink-0">
+                    <div className="w-3 h-3 rounded-full bg-black/10 group-hover:bg-[#FF5F56] transition-colors duration-fast" />
+                    <div className="w-3 h-3 rounded-full bg-black/10 group-hover:bg-[#FFBD2E] transition-colors duration-fast delay-75" />
+                    <div className="w-3 h-3 rounded-full bg-black/10 group-hover:bg-[#27C93F] transition-colors duration-fast delay-150" />
+                  </div>
 
-                {/* Content Area */}
-                <div className="flex-1 flex items-center justify-center relative overflow-hidden bg-gradient-to-tr from-[#E5E5EA]/20 to-transparent">
-                  {/* Abstract design elements to look like analysis in progress */}
-                  <div className="absolute top-1/4 left-1/4 w-[200px] h-[200px] bg-accent/10 rounded-full blur-3xl mix-blend-multiply" />
-                  <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-blue-500/10 rounded-full blur-3xl mix-blend-multiply" />
-                  <p className="text-muted text-h2 font-medium z-10 font-mono tracking-tight text-black/40">await extractDNA()</p>
+                  {/* Content Area */}
+                  <div className="flex-1 flex items-center justify-center relative overflow-hidden bg-[#E5E5EA]/20">
+                    {/* Abstract design elements to look like analysis in progress */}
+                    <div className="absolute top-1/4 left-1/4 w-[200px] h-[200px] bg-accent/5 rounded-full blur-3xl mix-blend-multiply" />
+                    <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-black/5 rounded-full blur-3xl mix-blend-multiply" />
+                    <p className="text-muted text-h2 font-medium z-10 font-mono tracking-tight text-black/40">await extractDNA()</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </ParallaxScroll>
           </FadeUp>
         </section>
 
@@ -73,14 +75,18 @@ export default function Home() {
         {/* FEATURE SPLIT */}
         <section id="features" className="px-16 md:px-64 flex flex-col md:flex-row gap-[96px] items-center mb-[128px]">
           <div className="flex-1 w-full order-2 md:order-1 relative">
-            <MediaCard
-              imageSrc="/editorial_minimal.png"
-              title="Editorial Whitespace"
-              subtitle="Let your content breathe."
-              aspectRatio="portrait"
-            />
+            <ParallaxScroll offset={60}>
+              <MediaCard
+                imageSrc="/editorial_minimal.png"
+                title="Editorial Whitespace"
+                subtitle="Let your content breathe."
+                aspectRatio="portrait"
+              />
+            </ParallaxScroll>
             {/* Floating decoration to match exactly.ai premium vibe */}
-            <div className="absolute -bottom-16 -right-16 w-32 h-32 bg-glass-light backdrop-blur-2xl rounded-lg shadow-float border border-white/40 hidden md:block" />
+            <ParallaxScroll offset={90} className="absolute -bottom-16 -right-16 z-20 hidden md:block">
+              <div className="w-32 h-32 bg-white rounded-lg shadow-float border border-border" />
+            </ParallaxScroll>
           </div>
           <div className="flex-1 order-1 md:order-2">
             <FadeUp>

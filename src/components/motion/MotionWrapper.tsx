@@ -1,8 +1,9 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { fadeUpVariant, staggerContainer, hoverLiftCard, glassInVariant } from "@/lib/motion"
 import { cn } from "@/lib/utils"
+import { useRef } from "react"
 
 export function FadeUp({
     children,
@@ -86,6 +87,31 @@ export function GlassPanelMotion({
             exit="exit"
             className={className}
         >
+            {children}
+        </motion.div>
+    )
+}
+
+export function ParallaxScroll({
+    children,
+    className,
+    offset = 100,
+}: {
+    children: React.ReactNode
+    className?: string
+    offset?: number
+}) {
+    const ref = useRef(null)
+    const { scrollYProgress } = useScroll({
+        target: ref,
+        offset: ["start end", "end start"]
+    })
+
+    // Map scroll progress from -offset to +offset
+    const y = useTransform(scrollYProgress, [0, 1], [-offset, offset])
+
+    return (
+        <motion.div ref={ref} style={{ y }} className={className}>
             {children}
         </motion.div>
     )
