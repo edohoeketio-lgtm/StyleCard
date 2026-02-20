@@ -12,10 +12,11 @@ export default function Home() {
       <Navbar />
       <main className="flex-1 w-full pt-[160px]">
         {/* HERO */}
-        <section className="px-16 md:px-64 flex flex-col items-center text-center mt-16 mb-[160px]">
+        <section className="px-16 md:px-64 flex flex-col items-center text-center mt-32 mb-[160px]">
           <FadeUp>
-            <h1 className="text-hero text-balance mb-16 max-w-5xl">
-              Extract the exact <span className="text-muted">Style DNA</span> of any website instantly.
+            <h1 className="text-[56px] md:text-[88px] leading-[1.05] tracking-[-0.05em] font-semibold text-balance mb-24 max-w-5xl text-primary">
+              Extract the exact <br className="hidden md:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-black to-accent/80">Style DNA</span> of any website.
             </h1>
           </FadeUp>
           <FadeUp delay={0.1}>
@@ -33,12 +34,26 @@ export default function Home() {
             </Link>
           </FadeUp>
 
-          <FadeUp delay={0.3} className="w-full max-w-[1000px] mt-[32px]">
-            {/* Huge Hero Media Card representing the Product */}
-            <div className="w-full aspect-video rounded-xl overflow-hidden relative shadow-float bg-secondary border border-border flex items-center justify-center p-8">
-              <div className="absolute inset-0 bg-overlay-gradient opacity-10 pointer-events-none" />
-              <div className="w-full h-full border border-dashed border-muted/30 rounded-lg flex items-center justify-center bg-white/50 backdrop-blur-sm">
-                <p className="text-muted text-h2 font-medium">Drop screenshots here</p>
+          <FadeUp delay={0.3} className="w-full max-w-[1200px] mt-[64px] relative perspective-1000">
+            {/* Dramatic Floating Hero Showpiece */}
+            <div className="w-full aspect-[16/10] md:aspect-[21/9] rounded-[32px] overflow-hidden relative shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)] border border-white/60 bg-white/40 backdrop-blur-3xl flex items-center justify-center p-8 transition-transform duration-[1500ms] hover:scale-[1.01] hover:-translate-y-2 group">
+              <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white to-transparent opacity-80" />
+              <div className="w-full h-full rounded-[24px] overflow-hidden flex flex-col bg-[#F5F5F7] shadow-inner relative">
+
+                {/* Simulated macOS Header */}
+                <div className="h-[48px] bg-white/80 backdrop-blur-md border-b border-black/5 flex items-center px-[24px] gap-8 shrink-0">
+                  <div className="w-3 h-3 rounded-full bg-black/10 group-hover:bg-[#FF5F56] transition-colors duration-fast" />
+                  <div className="w-3 h-3 rounded-full bg-black/10 group-hover:bg-[#FFBD2E] transition-colors duration-fast delay-75" />
+                  <div className="w-3 h-3 rounded-full bg-black/10 group-hover:bg-[#27C93F] transition-colors duration-fast delay-150" />
+                </div>
+
+                {/* Content Area */}
+                <div className="flex-1 flex items-center justify-center relative overflow-hidden bg-gradient-to-tr from-[#E5E5EA]/20 to-transparent">
+                  {/* Abstract design elements to look like analysis in progress */}
+                  <div className="absolute top-1/4 left-1/4 w-[200px] h-[200px] bg-accent/10 rounded-full blur-3xl mix-blend-multiply" />
+                  <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-blue-500/10 rounded-full blur-3xl mix-blend-multiply" />
+                  <p className="text-muted text-h2 font-medium z-10 font-mono tracking-tight text-black/40">await extractDNA()</p>
+                </div>
               </div>
             </div>
           </FadeUp>

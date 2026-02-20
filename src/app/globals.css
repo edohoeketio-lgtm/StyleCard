@@ -20,10 +20,25 @@
 
 body {
   color: var(--color-primary);
-  background: var(--color-background);
+  /* Ambient OS-style backdrop gradient */
+  background: var(--color-secondary);
+  background-image:
+    radial-gradient(circle at 15% 50%, rgba(200, 200, 210, 0.4) 0%, transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(255, 77, 45, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 50% 100%, rgba(200, 200, 210, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 1) 0%, rgba(245, 245, 247, 0.2) 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "cv11", "ss01";
+}
+
+/* Beautiful selection highlighting */
+::selection {
+  background-color: rgba(255, 77, 45, 0.15);
+  color: var(--color-primary);
 }
 
 @layer utilities {

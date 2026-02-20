@@ -136,8 +136,8 @@ export default function AnalyzePage() {
                                 onClick={() => fileInputRef.current?.click()}
                             >
                                 <UploadCloud className={`w-12 h-12 mb-16 ${isDragging ? "text-accent" : "text-muted"}`} />
-                                <p className="text-h2 font-medium text-primary mb-8 text-center">Click or drag images here</p>
-                                <p className="text-muted text-small">Up to 3 images. PNG, JPG, WebP.</p>
+                                <p className="text-h2 font-semibold text-primary mb-8 text-center tracking-tight">Drop screenshots here</p>
+                                <p className="text-muted text-small font-medium">Up to 3 images. PNG, JPG, WebP.</p>
 
                                 <input
                                     type="file"
@@ -163,98 +163,105 @@ export default function AnalyzePage() {
                 )}
 
                 {result && !isAnalyzing && (
-                    <section className="px-16 md:px-64">
-                        <div className="flex flex-col lg:flex-row gap-[64px] items-start">
+                    <section className="px-16 md:px-64 flex justify-center">
+                        {/* THE BENTO WINDOW */}
+                        <div className="w-full max-w-6xl bg-white/60 backdrop-blur-3xl rounded-[32px] border border-white/50 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)] p-[32px] md:p-[48px] overflow-hidden relative">
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-[32px] relative z-10">
 
-                            {/* Left: Original Images Stack */}
-                            <div className="w-full lg:w-1/2 sticky top-[128px]">
-                                <FadeUp>
-                                    <div className="relative w-full aspect-square md:aspect-video lg:aspect-[4/3] rounded-xl overflow-hidden shadow-float ml-8 mt-8">
-                                        <img src={result.originalImages[0]} alt="Uploaded screenshot preview" className="w-full h-full object-cover" />
-                                        {result.originalImages.length > 1 && (
-                                            <div className="absolute top-8 left-8 bg-glass-light backdrop-blur-md rounded-pill px-16 py-8 text-small font-medium border border-white/20">
-                                                + {result.originalImages.length - 1} more
-                                            </div>
-                                        )}
-                                    </div>
-                                </FadeUp>
-                            </div>
-
-                            {/* Right: Analysis Results */}
-                            <div className="w-full lg:w-1/2 space-y-[64px]">
-
-                                {/* Palette */}
-                                <FadeUp delay={0.05}>
-                                    <h3 className="text-h2 mb-24 border-b border-border pb-16">Extracted Palette</h3>
-                                    <div className="flex flex-wrap gap-16">
-                                        {result.palette.map((color, i) => (
-                                            <HoverLiftWrapper key={i}>
-                                                <div
-                                                    className="flex flex-col items-center group cursor-copy"
-                                                    onClick={() => copyToClipboard(color.hex, i)}
-                                                >
-                                                    <div
-                                                        className="w-[80px] h-[80px] rounded-pill shadow-glass border border-black/5 mb-16 relative flex items-center justify-center"
-                                                        style={{ backgroundColor: color.hex }}
-                                                    >
-                                                        {copiedToken === i && <Check className="text-white w-8 h-8 drop-shadow-md" />}
-                                                    </div>
-                                                    <span className="text-small font-mono text-primary group-hover:text-accent transition-colors">{color.hex}</span>
-                                                    <span className="text-small text-muted capitalize mt-4">{color.role}</span>
+                                {/* Left Col: Original Images Hero */}
+                                <div className="col-span-1 lg:col-span-5 relative">
+                                    <FadeUp className="h-full">
+                                        <div className="relative w-full h-full min-h-[400px] rounded-[24px] overflow-hidden shadow-glass border border-black/5 bg-[#F5F5F7]">
+                                            <img src={result.originalImages[0]} alt="Uploaded screenshot preview" className="w-full h-full object-cover" />
+                                            {result.originalImages.length > 1 && (
+                                                <div className="absolute top-16 left-16 bg-white/80 backdrop-blur-md rounded-pill px-16 py-8 text-small font-semibold border border-black/5 shadow-sm text-primary">
+                                                    + {result.originalImages.length - 1} more frames
                                                 </div>
-                                            </HoverLiftWrapper>
-                                        ))}
-                                    </div>
-                                </FadeUp>
-
-                                {/* Vibe Tags */}
-                                <FadeUp delay={0.10}>
-                                    <h3 className="text-h2 mb-24 border-b border-border pb-16">Vibe Tags</h3>
-                                    <div className="flex flex-wrap gap-16">
-                                        {result.vibeTags.map((tag, i) => (
-                                            <div key={i} className="bg-secondary text-primary px-[24px] py-[12px] rounded-pill text-body font-medium">
-                                                {tag}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </FadeUp>
-
-                                {/* Metrics */}
-                                <FadeUp delay={0.15}>
-                                    <h3 className="text-h2 mb-24 border-b border-border pb-16">Core Metrics</h3>
-                                    <div className="grid grid-cols-2 gap-32">
-                                        {Object.entries(result.metrics).map(([key, value]) => (
-                                            <div key={key}>
-                                                <span className="text-small text-muted uppercase tracking-wider block mb-8">{key}</span>
-                                                <div className="flex items-center gap-16">
-                                                    <span className="text-h2">{value}</span>
-                                                    <div className="flex-1 h-8 bg-secondary rounded-pill overflow-hidden">
-                                                        <motion.div
-                                                            className="h-full bg-accent"
-                                                            initial={{ width: 0 }}
-                                                            animate={{ width: `${value}%` }}
-                                                            transition={{ duration: DURATION.slow, ease: EASING_PREMIUM }}
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </FadeUp>
-
-                                {/* Actions */}
-                                <FadeUp delay={0.20} className="pt-[32px]">
-                                    <div className="bg-secondary rounded-xl p-[32px] flex items-center justify-between shadow-glass">
-                                        <div>
-                                            <h4 className="text-h2 mb-8">Generate Output</h4>
-                                            <p className="text-small text-muted">Create a premium OG card to share your extracted DNA.</p>
+                                            )}
                                         </div>
-                                        <PillButton onClick={handleGenerateShareCard} disabled={isGeneratingCard}>
-                                            {isGeneratingCard ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : "Create Share Card"}
-                                        </PillButton>
-                                    </div>
-                                </FadeUp>
+                                    </FadeUp>
+                                </div>
 
+                                {/* Right Col: Bento Analysis Output */}
+                                <div className="col-span-1 lg:col-span-7 flex flex-col gap-[32px]">
+
+                                    {/* Palette Row */}
+                                    <FadeUp delay={0.05} className="bg-white/40 border border-white/50 shadow-sm rounded-[24px] p-[32px]">
+                                        <h3 className="text-[24px] font-semibold tracking-tight mb-24 opacity-80">Style Palette</h3>
+                                        <div className="flex flex-wrap gap-8">
+                                            {result.palette.map((color, i) => (
+                                                <HoverLiftWrapper key={i}>
+                                                    <div
+                                                        className="flex flex-col items-center group cursor-copy"
+                                                        onClick={() => copyToClipboard(color.hex, i)}
+                                                    >
+                                                        <div
+                                                            className="w-[100px] h-[100px] rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.06)] border border-white/40 mb-16 relative flex items-center justify-center transition-transform hover:scale-105"
+                                                            style={{ backgroundColor: color.hex }}
+                                                        >
+                                                            {copiedToken === i && <Check className="text-white w-8 h-8 drop-shadow-md" />}
+                                                        </div>
+                                                        <span className="text-[14px] font-mono tracking-tight text-primary/80 group-hover:text-accent transition-colors">{color.hex}</span>
+                                                        <span className="text-[12px] text-muted font-medium capitalize mt-4">{color.role}</span>
+                                                    </div>
+                                                </HoverLiftWrapper>
+                                            ))}
+                                        </div>
+                                    </FadeUp>
+
+                                    {/* Core Metrics & Vibes Grid */}
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-[32px]">
+
+                                        {/* Vibes Box */}
+                                        <FadeUp delay={0.10} className="bg-white/40 border border-white/50 shadow-sm rounded-[24px] p-[32px]">
+                                            <h3 className="text-[24px] font-semibold tracking-tight mb-24 opacity-80">Aesthetic Vibes</h3>
+                                            <div className="flex flex-wrap gap-12">
+                                                {result.vibeTags.map((tag, i) => (
+                                                    <div key={i} className="bg-[#F5F5F7]/80 border border-black/5 text-primary px-[20px] py-[10px] rounded-pill text-[15px] font-semibold">
+                                                        {tag}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </FadeUp>
+
+                                        {/* Metrics Box */}
+                                        <FadeUp delay={0.15} className="bg-gradient-to-br from-[#1D1D1F] to-[#000000] text-white shadow-float rounded-[24px] p-[32px]">
+                                            <h3 className="text-[24px] font-semibold tracking-tight mb-24 text-white">System Metrics</h3>
+                                            <div className="flex flex-col gap-24">
+                                                {Object.entries(result.metrics).map(([key, value]) => (
+                                                    <div key={key}>
+                                                        <div className="flex items-center justify-between mb-8">
+                                                            <span className="text-[14px] text-white/50 uppercase tracking-[0.1em] font-medium">{key}</span>
+                                                            <span className="text-[16px] font-mono tracking-tighter mix-blend-screen">{value}</span>
+                                                        </div>
+                                                        <div className="w-full h-[3px] bg-white/10 rounded-pill overflow-hidden relative">
+                                                            <motion.div
+                                                                className="absolute top-0 left-0 bottom-0 bg-white shadow-[0_0_10px_rgba(255,255,255,0.7)]"
+                                                                initial={{ width: 0 }}
+                                                                animate={{ width: `${value}%` }}
+                                                                transition={{ duration: DURATION.slow, ease: EASING_PREMIUM }}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </FadeUp>
+                                    </div>
+
+                                    {/* Deep OS Action Row */}
+                                    <FadeUp delay={0.20} className="w-full">
+                                        <div className="bg-transparent border border-black/10 rounded-[24px] p-[24px] flex items-center justify-between mt-16 backdrop-blur-md">
+                                            <div>
+                                                <h4 className="text-[20px] font-semibold tracking-tight">Generate Output</h4>
+                                                <p className="text-[14px] text-muted">Compile into a premium PNG card.</p>
+                                            </div>
+                                            <PillButton onClick={handleGenerateShareCard} disabled={isGeneratingCard} className="shadow-none border border-black/10 hover:scale-[0.98]">
+                                                {isGeneratingCard ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : "Create Card"}
+                                            </PillButton>
+                                        </div>
+                                    </FadeUp>
+
+                                </div>
                             </div>
                         </div>
                     </section>
