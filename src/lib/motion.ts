@@ -1,6 +1,6 @@
 import type { Variants } from "framer-motion";
 
-export const EASING_PREMIUM: [number, number, number, number] = [0.16, 1, 0.3, 1];
+export const EASING_PREMIUM: [number, number, number, number] = [0.32, 0.72, 0, 1];
 export const EASING_SMOOTH: [number, number, number, number] = [0.65, 0, 0.35, 1];
 
 export const DURATION = {

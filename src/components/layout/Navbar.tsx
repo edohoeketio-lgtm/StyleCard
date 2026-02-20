@@ -3,7 +3,7 @@ import { PillButton } from "@/components/ui/PillButton"
 
 export function Navbar() {
     return (
-        <nav className="fixed top-0 left-0 right-0 h-[80px] z-50 bg-glass-light backdrop-blur-[12px] border-b border-border flex items-center px-16 md:px-64 justify-between transition-all duration-med ease-premium">
+        <nav className="fixed top-0 left-0 right-0 h-[80px] z-50 bg-white/70 backdrop-blur-xl flex items-center px-16 md:px-64 justify-between transition-all duration-med ease-premium shadow-sm shadow-black/[0.03]">
             <div className="flex items-center gap-32">
                 <Link href="/" className="flex items-center gap-8 group">
                     <div className="w-[24px] h-[24px] rounded-sm bg-primary rotation-0 group-hover:rotate-12 transition-transform duration-med ease-premium" />

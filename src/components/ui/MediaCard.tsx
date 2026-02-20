@@ -29,21 +29,21 @@ export function MediaCard({
     return (
         <HoverLiftWrapper className="w-full">
             <div
-                className={`w-full ${aspectClass} rounded-lg overflow-hidden relative group bg-secondary`}
+                className={`w-full ${aspectClass} rounded-lg overflow-hidden relative group bg-[#E5E5EA]/40`}
                 onClick={onClick}
             >
                 {imageSrc ? (
                     <img
                         src={imageSrc}
                         alt={title || ""}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-slow ease-premium group-hover:scale-105"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-slow ease-premium group-hover:scale-[1.02]"
                     />
                 ) : (
                     <div className="absolute inset-0 bg-secondary flex items-center justify-center text-muted">No Image</div>
                 )}
 
                 {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-overlay-gradient pointer-events-none opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent pointer-events-none" />
 
                 {/* Content */}
                 <div className="absolute bottom-0 left-0 right-0 p-[24px] pointer-events-none">

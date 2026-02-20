@@ -39,12 +39,12 @@ const config: Config = {
         "128": "128px",
       },
       fontSize: {
-        "hero": ["72px", { lineHeight: "1.1", letterSpacing: "-0.04em", fontWeight: "500" }],
-        "h1": ["48px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "500" }],
-        "h2": ["32px", { lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "500" }],
-        "body-large": ["20px", { lineHeight: "1.5", fontWeight: "400" }],
-        "body": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
-        "small": ["14px", { lineHeight: "1.4", fontWeight: "500" }],
+        "hero": ["72px", { lineHeight: "1.1", letterSpacing: "-0.04em", fontWeight: "600" }],
+        "h1": ["48px", { lineHeight: "1.2", letterSpacing: "-0.03em", fontWeight: "600" }],
+        "h2": ["32px", { lineHeight: "1.3", letterSpacing: "-0.02em", fontWeight: "500" }],
+        "body-large": ["20px", { lineHeight: "1.5", letterSpacing: "0.01em", fontWeight: "400" }],
+        "body": ["16px", { lineHeight: "1.5", letterSpacing: "0.01em", fontWeight: "400" }],
+        "small": ["14px", { lineHeight: "1.4", letterSpacing: "0.01em", fontWeight: "500" }],
       },
       borderRadius: {
         "sm": "8px",
@@ -61,7 +61,7 @@ const config: Config = {
         "overlay-gradient": "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%)",
       },
       transitionTimingFunction: {
-        "premium": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "premium": "cubic-bezier(0.32, 0.72, 0, 1)",
         "smooth": "cubic-bezier(0.65, 0, 0.35, 1)",
       },
       transitionDuration: {
@@ -70,7 +70,7 @@ const config: Config = {
         "slow": "700ms",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
+        sans: ["var(--font-inter)", "-apple-system", "BlinkMacSystemFont", "SF Pro Text", "Segoe UI", "Roboto", "sans-serif"],
       },
     },
   },

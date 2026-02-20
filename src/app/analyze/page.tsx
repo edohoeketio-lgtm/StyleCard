@@ -126,8 +126,8 @@ export default function AnalyzePage() {
 
                         <FadeUp delay={0.1} className="w-full max-w-4xl">
                             <div
-                                className={`w-full aspect-video rounded-xl border-2 border-dashed transition-all duration-med ease-premium flex flex-col items-center justify-center p-32 bg-secondary cursor-pointer
-                   ${isDragging ? "border-accent bg-accent/5 scale-[1.02]" : "border-border hover:border-muted"}
+                                className={`w-full aspect-video rounded-xl border border-solid transition-all duration-med ease-premium flex flex-col items-center justify-center p-32 bg-glass-light backdrop-blur-xl shadow-float cursor-pointer
+                   ${isDragging ? "border-accent bg-accent/5 scale-[1.02]" : "border-white/60 hover:border-muted/30"}
                  `}
                                 onDragEnter={handleDrag}
                                 onDragOver={handleDrag}
@@ -184,7 +184,7 @@ export default function AnalyzePage() {
                             <div className="w-full lg:w-1/2 space-y-[64px]">
 
                                 {/* Palette */}
-                                <FadeUp delay={0.1}>
+                                <FadeUp delay={0.05}>
                                     <h3 className="text-h2 mb-24 border-b border-border pb-16">Extracted Palette</h3>
                                     <div className="flex flex-wrap gap-16">
                                         {result.palette.map((color, i) => (
@@ -208,7 +208,7 @@ export default function AnalyzePage() {
                                 </FadeUp>
 
                                 {/* Vibe Tags */}
-                                <FadeUp delay={0.2}>
+                                <FadeUp delay={0.10}>
                                     <h3 className="text-h2 mb-24 border-b border-border pb-16">Vibe Tags</h3>
                                     <div className="flex flex-wrap gap-16">
                                         {result.vibeTags.map((tag, i) => (
@@ -220,7 +220,7 @@ export default function AnalyzePage() {
                                 </FadeUp>
 
                                 {/* Metrics */}
-                                <FadeUp delay={0.3}>
+                                <FadeUp delay={0.15}>
                                     <h3 className="text-h2 mb-24 border-b border-border pb-16">Core Metrics</h3>
                                     <div className="grid grid-cols-2 gap-32">
                                         {Object.entries(result.metrics).map(([key, value]) => (
@@ -243,7 +243,7 @@ export default function AnalyzePage() {
                                 </FadeUp>
 
                                 {/* Actions */}
-                                <FadeUp delay={0.4} className="pt-[32px]">
+                                <FadeUp delay={0.20} className="pt-[32px]">
                                     <div className="bg-secondary rounded-xl p-[32px] flex items-center justify-between shadow-glass">
                                         <div>
                                             <h4 className="text-h2 mb-8">Generate Output</h4>

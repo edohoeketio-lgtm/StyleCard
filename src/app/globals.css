@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #111111;
-  --color-secondary: #F7F7F7;
+  --color-primary: #1D1D1F;
+  --color-secondary: #F5F5F7;
   --color-background: #FFFFFF;
-  --color-muted: #888888;
-  --color-border: #EAEAEA;
+  --color-muted: #86868B;
+  --color-border: #E5E5EA;
   --color-accent: #FF4D2D;
   --color-accent-hover: #E63D1F;
   --color-glass-light: rgba(255, 255, 255, 0.7);
@@ -23,6 +23,7 @@ body {
   background: var(--color-background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv11", "ss01";
 }
 
 @layer utilities {

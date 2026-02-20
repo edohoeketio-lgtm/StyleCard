@@ -10,9 +10,9 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 w-full pt-[128px]">
+      <main className="flex-1 w-full pt-[160px]">
         {/* HERO */}
-        <section className="px-16 md:px-64 flex flex-col items-center text-center mt-32 mb-[128px]">
+        <section className="px-16 md:px-64 flex flex-col items-center text-center mt-16 mb-[160px]">
           <FadeUp>
             <h1 className="text-hero text-balance mb-16 max-w-5xl">
               Extract the exact <span className="text-muted">Style DNA</span> of any website instantly.
@@ -45,13 +45,13 @@ export default function Home() {
         </section>
 
         {/* TRUST ROW */}
-        <section className="px-16 md:px-64 py-[96px] border-y border-border mb-[128px]">
-          <StaggerChildren className="flex flex-wrap justify-between items-center opacity-40 grayscale gap-32">
-            <span className="text-h2 font-bold tracking-tight">Acme Corp</span>
-            <span className="text-h2 font-bold tracking-tight">Globex</span>
-            <span className="text-h2 font-bold tracking-tight">Soylent</span>
-            <span className="text-h2 font-bold tracking-tight">Initech</span>
-            <span className="text-h2 font-bold tracking-tight">Umbrella</span>
+        <section className="px-16 md:px-64 py-[96px] border-y border-border mb-[160px]">
+          <StaggerChildren className="flex flex-wrap justify-between items-center opacity-30 grayscale gap-32 *:transition-opacity *:duration-fast hover:*:opacity-100">
+            <span className="text-h2 font-semibold tracking-tight transition-opacity hover:opacity-100 cursor-default">Acme Corp</span>
+            <span className="text-h2 font-semibold tracking-tight transition-opacity hover:opacity-100 cursor-default">Globex</span>
+            <span className="text-h2 font-semibold tracking-tight transition-opacity hover:opacity-100 cursor-default">Soylent</span>
+            <span className="text-h2 font-semibold tracking-tight transition-opacity hover:opacity-100 cursor-default">Initech</span>
+            <span className="text-h2 font-semibold tracking-tight transition-opacity hover:opacity-100 cursor-default">Umbrella</span>
           </StaggerChildren>
         </section>
 
@@ -70,7 +70,7 @@ export default function Home() {
           <div className="flex-1 order-1 md:order-2">
             <FadeUp>
               <h2 className="text-h1 mb-32 tracking-tight">Stop guessing.<br />Start generating.</h2>
-              <p className="text-body-large text-muted mb-32">
+              <p className="text-body-large text-muted mb-32 max-w-prose">
                 StyleCard runs lightweight Canvas heuristics directly in your browser. No massive AI payloads, zero privacy concerns. Just pure, deterministic aesthetic extraction.
               </p>
               <Link href="/analyze">
