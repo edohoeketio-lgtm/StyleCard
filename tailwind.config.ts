@@ -8,10 +8,69 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: {
+          DEFAULT: "var(--color-primary)",
+        },
+        secondary: {
+          DEFAULT: "var(--color-secondary)",
+        },
+        muted: "var(--color-muted)",
+        accent: {
+          DEFAULT: "var(--color-accent)",
+          hover: "var(--color-accent-hover)",
+        },
+        border: "var(--color-border)",
+        glass: {
+          light: "var(--color-glass-light)",
+          dark: "var(--color-glass-dark)",
+        }
+      },
+      spacing: {
+        "4": "4px",
+        "8": "8px",
+        "12": "12px",
+        "16": "16px",
+        "24": "24px",
+        "32": "32px",
+        "48": "48px",
+        "64": "64px",
+        "96": "96px",
+        "128": "128px",
+      },
+      fontSize: {
+        "hero": ["72px", { lineHeight: "1.1", letterSpacing: "-0.04em", fontWeight: "500" }],
+        "h1": ["48px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "500" }],
+        "h2": ["32px", { lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "500" }],
+        "body-large": ["20px", { lineHeight: "1.5", fontWeight: "400" }],
+        "body": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+        "small": ["14px", { lineHeight: "1.4", fontWeight: "500" }],
+      },
+      borderRadius: {
+        "sm": "8px",
+        "md": "16px",
+        "lg": "32px",
+        "xl": "48px",
+        "pill": "9999px",
+      },
+      boxShadow: {
+        "float": "0 20px 40px -10px rgba(0, 0, 0, 0.08)",
+        "glass": "0 8px 32px rgba(0, 0, 0, 0.04)",
+      },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "overlay-gradient": "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%)",
+      },
+      transitionTimingFunction: {
+        "premium": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "smooth": "cubic-bezier(0.65, 0, 0.35, 1)",
+      },
+      transitionDuration: {
+        "fast": "200ms",
+        "med": "400ms",
+        "slow": "700ms",
+      },
+      fontFamily: {
+        sans: ["var(--font-inter)", "sans-serif"],
       },
     },
   },
