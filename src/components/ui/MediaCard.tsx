@@ -35,7 +35,7 @@ export function MediaCard({
                 {imageSrc ? (
                     <img
                         src={imageSrc}
-                        alt={title || "Media Card"}
+                        alt={title || ""}
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-slow ease-premium group-hover:scale-105"
                     />
                 ) : (

@@ -144,7 +144,7 @@ export default function AnalyzePage() {
                             <div className="w-full lg:w-1/2 sticky top-[128px]">
                                 <FadeUp>
                                     <div className="relative w-full aspect-square md:aspect-video lg:aspect-[4/3] rounded-xl overflow-hidden shadow-float ml-8 mt-8">
-                                        <img src={result.originalImages[0]} className="w-full h-full object-cover" />
+                                        <img src={result.originalImages[0]} alt="Uploaded screenshot preview" className="w-full h-full object-cover" />
                                         {result.originalImages.length > 1 && (
                                             <div className="absolute top-8 left-8 bg-glass-light backdrop-blur-md rounded-pill px-16 py-8 text-small font-medium border border-white/20">
                                                 + {result.originalImages.length - 1} more

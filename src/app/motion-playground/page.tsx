@@ -10,6 +10,7 @@ import {
 import { HorizontalGallery } from "@/components/motion/HorizontalGallery"
 import { PillButton } from "@/components/ui/PillButton"
 import { SegmentedControl } from "@/components/ui/SegmentedControl"
+import { motion } from "framer-motion"
 
 export default function MotionPlayground() {
     const [isModalOpen, setIsModalOpen] = useState(false)

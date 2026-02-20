@@ -53,7 +53,7 @@ function rgbToHex(r: number, g: number, b: number) {
 export async function analyzeImages(files: File[]): Promise<StyleDNAOutput> {
     const images: HTMLImageElement[] = await Promise.all(
         files.map(file => {
-            return new Promise((resolve, reject) => {
+            return new Promise<HTMLImageElement>((resolve, reject) => {
                 const url = URL.createObjectURL(file)
                 const img = new Image()
                 img.onload = () => resolve(img)
