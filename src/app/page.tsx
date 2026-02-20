@@ -74,7 +74,7 @@ export default function Home() {
         <section id="features" className="px-16 md:px-64 flex flex-col md:flex-row gap-[96px] items-center mb-[128px]">
           <div className="flex-1 w-full order-2 md:order-1 relative">
             <MediaCard
-              imageSrc="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
+              imageSrc="/editorial_minimal.png"
               title="Editorial Whitespace"
               subtitle="Let your content breathe."
               aspectRatio="portrait"
@@ -100,17 +100,19 @@ export default function Home() {
           <h2 className="text-h2 px-16 md:px-64 mb-32">Recent Extractions</h2>
           <HorizontalGallery>
             {[
-              { id: 1, color: "#111111", tag: "Minimalist" },
-              { id: 2, color: "#FF4D2D", tag: "Vibrant" },
-              { id: 3, color: "#EAEAEA", tag: "Airy" },
-              { id: 4, color: "#2B4C7E", tag: "Editorial" },
+              { id: 1, image: "/editorial_minimal.png", tag: "Minimalist" },
+              { id: 2, image: "/sleek_typography.png", tag: "Typography" },
+              { id: 3, image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop", tag: "Airy" },
+              { id: 4, image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop", tag: "Architectural" },
             ].map(item => (
               <div key={item.id} className="snap-start shrink-0 w-[280px] md:w-[400px]">
-                <div className="w-full aspect-[4/3] rounded-lg border border-border overflow-hidden relative shadow-glass transition-transform duration-slow hover:-translate-y-2">
-                  <div className="absolute inset-x-0 top-0 h-1/2" style={{ backgroundColor: item.color }} />
-                  <div className="absolute inset-x-0 bottom-0 h-1/2 bg-white p-24 flex flex-col justify-end">
-                    <span className="text-small bg-secondary px-12 py-4 rounded-pill w-max mb-12">{item.tag}</span>
-                    <p className="text-body font-medium">Project DNA {item.id}</p>
+                <div className="w-full h-full flex flex-col rounded-lg border border-border overflow-hidden relative shadow-glass transition-transform duration-slow hover:-translate-y-2 group bg-white">
+                  <div className="w-full h-[60%] aspect-video overflow-hidden bg-secondary">
+                    <img src={item.image} alt={item.tag} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-slow" />
+                  </div>
+                  <div className="w-full flex-1 bg-white p-24 flex flex-col justify-end border-t border-border">
+                    <span className="text-small bg-secondary px-12 py-4 rounded-pill w-max mb-12 text-primary">{item.tag}</span>
+                    <p className="text-body font-medium text-primary">Project DNA {item.id}</p>
                   </div>
                 </div>
               </div>

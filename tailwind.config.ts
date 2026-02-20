@@ -54,8 +54,8 @@ const config: Config = {
         "pill": "9999px",
       },
       boxShadow: {
-        "float": "0 20px 40px -10px rgba(0, 0, 0, 0.08)",
-        "glass": "0 8px 32px rgba(0, 0, 0, 0.04)",
+        "float": "0 10px 40px -10px rgba(0, 0, 0, 0.03)",
+        "glass": "0 4px 24px rgba(0, 0, 0, 0.02)",
       },
       backgroundImage: {
         "overlay-gradient": "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%)",

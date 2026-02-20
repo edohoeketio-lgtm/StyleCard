@@ -29,32 +29,33 @@ export function MediaCard({
     return (
         <HoverLiftWrapper className="w-full">
             <div
-                className={`w-full ${aspectClass} rounded-lg overflow-hidden relative group bg-[#E5E5EA]/40`}
+                className={`w-full ${aspectClass} rounded-lg overflow-hidden group bg-white border border-border flex flex-col`}
                 onClick={onClick}
             >
-                {imageSrc ? (
-                    <img
-                        src={imageSrc}
-                        alt={title || ""}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-slow ease-premium group-hover:scale-[1.02]"
-                    />
-                ) : (
-                    <div className="absolute inset-0 bg-secondary flex items-center justify-center text-muted">No Image</div>
+                <div className="relative flex-1 bg-secondary overflow-hidden">
+                    {imageSrc ? (
+                        <img
+                            src={imageSrc}
+                            alt={title || ""}
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-slow ease-premium group-hover:scale-[1.02]"
+                        />
+                    ) : (
+                        <div className="absolute inset-0 flex items-center justify-center text-muted">No Image</div>
+                    )}
+
+                    {/* Corner Action Icon */}
+                    <div className="absolute top-[24px] right-[24px] flex items-center justify-center w-[48px] h-[48px] rounded-pill bg-white/80 backdrop-blur-md opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-fast ease-premium border border-black/5 shadow-glass">
+                        <Plus className="text-primary w-6 h-6" />
+                    </div>
+                </div>
+
+                {/* Flat Content Panel (No Gradients) */}
+                {(title || subtitle) && (
+                    <div className="w-full p-[24px] bg-white border-t border-border shrink-0">
+                        {title && <h3 className="text-[20px] font-semibold tracking-tight text-primary line-clamp-2">{title}</h3>}
+                        {subtitle && <p className="text-small text-muted mt-4 font-medium">{subtitle}</p>}
+                    </div>
                 )}
-
-                {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent pointer-events-none" />
-
-                {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-[24px] pointer-events-none">
-                    {title && <h3 className="text-h2 text-white line-clamp-2">{title}</h3>}
-                    {subtitle && <p className="text-body-large text-white/80 mt-8 mb-8">{subtitle}</p>}
-                </div>
-
-                {/* Corner Action Icon */}
-                <div className="absolute top-[24px] right-[24px] md:bottom-[24px] md:top-auto flex items-center justify-center w-[48px] h-[48px] rounded-pill bg-white/20 backdrop-blur-md opacity-0 translate-y-4 md:translate-y-0 md:translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-fast ease-premium shadow-glass">
-                    <Plus className="text-white w-6 h-6" />
-                </div>
             </div>
         </HoverLiftWrapper>
     )
