@@ -46,19 +46,30 @@ function rgbToHex(r: number, g: number, b: number) {
     }).join("").toUpperCase()
 }
 
+async function fileToDataURL(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onload = () => resolve(String(reader.result))
+        reader.onerror = reject
+        reader.readAsDataURL(file)
+    })
+}
+
 /**
  * Main Client-Side Analysis Engine
  * Extracts heuristics from a set of File objects using HTML5 Canvas.
  */
 export async function analyzeImages(files: File[]): Promise<StyleDNAOutput> {
+    // Convert files to data URLs for stable sharing + no objectURL leaks
+    const originalImages = await Promise.all(files.map(fileToDataURL))
+
     const images: HTMLImageElement[] = await Promise.all(
-        files.map(file => {
+        originalImages.map(src => {
             return new Promise<HTMLImageElement>((resolve, reject) => {
-                const url = URL.createObjectURL(file)
                 const img = new Image()
                 img.onload = () => resolve(img)
                 img.onerror = reject
-                img.src = url
+                img.src = src
             })
         })
     )
@@ -201,8 +212,8 @@ export async function analyzeImages(files: File[]): Promise<StyleDNAOutput> {
     // Confidence Score
     const confidenceScore = files.length === 1 ? 75 : (files.length === 3 ? 92 : 85)
 
-    // Convert images to data URLs for the UI
-    const originalImages = images.map(img => img.src)
+    // Convert images to data URLs for the UI (Already converted at start)
+
 
     return {
         palette,
