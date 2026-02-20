@@ -82,7 +82,11 @@ export default function AnalyzePage() {
     }
 
     const handleShareOnX = () => {
-        const text = `I just extracted the Style DNA of this website using stylecard.ai. \n\nCheck out the palette and vibe tags below. 👇`
+        if (!result) return
+        const tags = result.vibeTags.join(" • ")
+        const palette = result.palette.slice(0, 3).map(p => p.hex).join(" ")
+
+        const text = `My site's Style DNA:\n${tags}\nPalette: ${palette}\n\nGenerated with StyleCard → ${window.location.origin}/analyze`
         const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`
         window.open(url, "_blank")
     }
