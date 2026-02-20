@@ -103,7 +103,7 @@ export async function analyzeImages(files: File[]): Promise<StyleDNAOutput> {
             const b = data[i + 2]
             const a = data[i + 3]
 
-            if (a < 255) continue // skip transparent
+            if (a < 32) continue // skip mostly transparent
 
             totalPixels++
 
