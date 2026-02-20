@@ -3,7 +3,7 @@
 import { useState, useRef, useCallback } from "react"
 import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { FadeUp, GlassPanelMotion, HoverLiftWrapper } from "@/components/motion/MotionWrapper"
 import { EASING_PREMIUM, DURATION } from "@/lib/motion"
 import { PillButton } from "@/components/ui/PillButton"
@@ -262,32 +262,34 @@ export default function AnalyzePage() {
             </main>
 
             {/* Share Card Modal */}
-            {shareCardUrl && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-16 md:p-64">
-                    <div className="absolute inset-0 bg-glass-dark backdrop-blur-3xl" onClick={() => setShareCardUrl(null)} />
-                    <GlassPanelMotion isOpen={!!shareCardUrl} className="relative z-10 w-full max-w-5xl bg-secondary rounded-xl overflow-hidden shadow-float border border-border">
-                        <div className="bg-secondary p-[24px] flex items-center justify-between border-b border-border">
-                            <h3 className="text-h2 font-medium">Your Share Card</h3>
-                            <button onClick={() => setShareCardUrl(null)} className="text-muted hover:text-primary transition-colors">Close</button>
-                        </div>
+            <AnimatePresence>
+                {shareCardUrl && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-16 md:p-64">
+                        <div className="absolute inset-0 bg-glass-dark backdrop-blur-3xl" onClick={() => setShareCardUrl(null)} />
+                        <GlassPanelMotion isOpen={!!shareCardUrl} className="relative z-10 w-full max-w-5xl bg-secondary rounded-xl overflow-hidden shadow-float border border-border">
+                            <div className="bg-secondary p-[24px] flex items-center justify-between border-b border-border">
+                                <h3 className="text-h2 font-medium">Your Share Card</h3>
+                                <button onClick={() => setShareCardUrl(null)} className="text-muted hover:text-primary transition-colors">Close</button>
+                            </div>
 
-                        <div className="p-[32px] bg-glass-light flex justify-center items-center">
-                            <img src={shareCardUrl} alt="Generated StyleCard" className="max-w-full rounded-lg shadow-glass" />
-                        </div>
+                            <div className="p-[32px] bg-glass-light flex justify-center items-center">
+                                <img src={shareCardUrl} alt="Generated StyleCard" className="max-w-full rounded-lg shadow-glass" />
+                            </div>
 
-                        <div className="p-[24px] bg-secondary border-t border-border flex justify-end gap-16">
-                            <PillButton variant="secondary" onClick={handleShareOnX} className="flex items-center gap-8">
-                                <Share className="w-4 h-4" /> Share on X
-                            </PillButton>
-                            <a href={shareCardUrl} download="stylecard-dna.png">
-                                <PillButton variant="primary" className="flex items-center gap-8 border border-black/10">
-                                    <Download className="w-4 h-4" /> Download PNG
+                            <div className="p-[24px] bg-secondary border-t border-border flex justify-end gap-16">
+                                <PillButton variant="secondary" onClick={handleShareOnX} className="flex items-center gap-8">
+                                    <Share className="w-4 h-4" /> Share on X
                                 </PillButton>
-                            </a>
-                        </div>
-                    </GlassPanelMotion>
-                </div>
-            )}
+                                <a href={shareCardUrl} download="stylecard-dna.png">
+                                    <PillButton variant="primary" className="flex items-center gap-8 border border-black/10">
+                                        <Download className="w-4 h-4" /> Download PNG
+                                    </PillButton>
+                                </a>
+                            </div>
+                        </GlassPanelMotion>
+                    </div>
+                )}
+            </AnimatePresence>
 
             {result && <Footer />}
         </>
