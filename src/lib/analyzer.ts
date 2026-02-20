@@ -83,7 +83,7 @@ export async function analyzeImages(files: File[]): Promise<StyleDNAOutput> {
 
     let totalPixels = 0
     let totalLum = 0
-    let lumValues: number[] = []
+    let totalLumSq = 0
     let totalSat = 0
     let totalEdges = 0
 
@@ -110,7 +110,7 @@ export async function analyzeImages(files: File[]): Promise<StyleDNAOutput> {
             // Luminance (Brightness)
             const lum = (0.299 * r + 0.587 * g + 0.114 * b)
             totalLum += lum
-            lumValues.push(lum)
+            totalLumSq += lum * lum
 
             // Saturation
             const [h, s, l] = rgbToHsl(r, g, b)
@@ -143,9 +143,9 @@ export async function analyzeImages(files: File[]): Promise<StyleDNAOutput> {
     const avgLum = totalLum / totalPixels
     const brightness = Math.round((avgLum / 255) * 100)
 
-    // Contrast (Standard deviation of luminance)
-    const variance = lumValues.reduce((acc, val) => acc + Math.pow(val - avgLum, 2), 0) / totalPixels
-    const stdDev = Math.sqrt(variance)
+    // Contrast (Standard deviation of luminance using single-pass formula)
+    const variance = (totalLumSq - (totalLum * totalLum) / totalPixels) / totalPixels
+    const stdDev = Math.sqrt(Math.max(0, variance))
     const contrast = Math.round(Math.min(100, (stdDev / 128) * 100 * 1.5)) // normalized roughly to 0-100
 
     const saturation = Math.round(totalSat / totalPixels)
