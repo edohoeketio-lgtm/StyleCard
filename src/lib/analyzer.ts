@@ -133,7 +133,7 @@ export async function analyzeImages(files: File[]): Promise<StyleDNAOutput> {
             const key = `${rB},${gB},${bB}`
 
             if (!colorBuckets[key]) {
-                colorBuckets[key] = { count: 0, r, g, b }
+                colorBuckets[key] = { count: 0, r: rB, g: gB, b: bB }
             }
             colorBuckets[key].count++
         }
