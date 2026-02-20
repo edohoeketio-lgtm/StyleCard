@@ -3,7 +3,9 @@
 import { useState, useRef, useCallback } from "react"
 import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
+import { motion } from "framer-motion"
 import { FadeUp, GlassPanelMotion, HoverLiftWrapper } from "@/components/motion/MotionWrapper"
+import { EASING_PREMIUM, DURATION } from "@/lib/motion"
 import { PillButton } from "@/components/ui/PillButton"
 import { analyzeImages, type StyleDNAOutput } from "@/lib/analyzer"
 import { generateShareCard } from "@/lib/share-card"
@@ -203,7 +205,12 @@ export default function AnalyzePage() {
                                                 <div className="flex items-center gap-16">
                                                     <span className="text-h2">{value}</span>
                                                     <div className="flex-1 h-8 bg-secondary rounded-pill overflow-hidden">
-                                                        <div className="h-full bg-primary" style={{ width: `${value}%` }} />
+                                                        <motion.div
+                                                            className="h-full bg-accent"
+                                                            initial={{ width: 0 }}
+                                                            animate={{ width: `${value}%` }}
+                                                            transition={{ duration: DURATION.slow, ease: EASING_PREMIUM }}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
