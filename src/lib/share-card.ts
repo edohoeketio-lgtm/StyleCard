@@ -9,11 +9,8 @@ export async function generateShareCard(dna: StyleDNAOutput): Promise<string> {
     const ctx = canvas.getContext("2d")!
 
     // 1. Canvas Background
-    const isDark = dna.metrics.brightness < 30
-    const dominantHex = dna.palette.find(p => p.role === "dominant")?.hex || "#F7F7F7"
-    ctx.fillStyle = isDark ? "#111111" : "#F7F7F7"
-    // Wait, spec says: bg: #F7F7F7 OR user's dominant hex if brightness > 20. Let's use #F7F7F7 to be safe and clean.
-    ctx.fillStyle = "#F7F7F7"
+    const isDark = dna.metrics.brightness < 35
+    ctx.fillStyle = isDark ? "#0B0C10" : "#F7F7F7"
     ctx.fillRect(0, 0, width, height)
 
     // 2. Load images into memory
@@ -87,7 +84,7 @@ export async function generateShareCard(dna: StyleDNAOutput): Promise<string> {
     let currentY = 160
 
     // Title
-    ctx.fillStyle = "#111111"
+    ctx.fillStyle = isDark ? "#FFFFFF" : "#111111"
     ctx.font = "500 48px Inter, sans-serif"
     ctx.fillText("Style DNA", textX, currentY)
 
@@ -129,12 +126,21 @@ export async function generateShareCard(dna: StyleDNAOutput): Promise<string> {
 
         // Draw pill bg
         ctx.beginPath()
-        ctx.roundRect(tagX, currentY, width, height, 9999)
-        ctx.fillStyle = "#EAEAEA"
+        if (typeof ctx.roundRect === 'function') {
+            ctx.roundRect(tagX, currentY, width, height, 9999)
+        } else {
+            const r = height / 2;
+            ctx.moveTo(tagX + r, currentY);
+            ctx.arcTo(tagX + width, currentY, tagX + width, currentY + height, r);
+            ctx.arcTo(tagX + width, currentY + height, tagX, currentY + height, r);
+            ctx.arcTo(tagX, currentY + height, tagX, currentY, r);
+            ctx.arcTo(tagX, currentY, tagX + width, currentY, r);
+        }
+        ctx.fillStyle = isDark ? "rgba(255, 255, 255, 0.1)" : "#EAEAEA"
         ctx.fill()
 
         // Draw text
-        ctx.fillStyle = "#111111"
+        ctx.fillStyle = isDark ? "#FFFFFF" : "#111111"
         ctx.fillText(tag, tagX + paddingX, currentY + 28) // approximate baseline
 
         tagX += width + 16
@@ -148,7 +154,7 @@ export async function generateShareCard(dna: StyleDNAOutput): Promise<string> {
     ctx.fillText(metricsText, textX, currentY)
 
     // 8. Footer Branding
-    ctx.fillStyle = "#111111"
+    ctx.fillStyle = isDark ? "#FFFFFF" : "#111111"
     ctx.font = "600 24px Inter, sans-serif"
     ctx.globalAlpha = 0.6
     ctx.fillText("stylecard.ai", textX, height - 48)

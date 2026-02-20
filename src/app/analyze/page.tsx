@@ -24,8 +24,16 @@ export default function AnalyzePage() {
     const fileInputRef = useRef<HTMLInputElement>(null)
 
     const handleFiles = async (newFiles: FileList | File[]) => {
-        const validFiles = Array.from(newFiles).filter(f => f.type.startsWith("image/")).slice(0, 3)
-        if (validFiles.length === 0) return
+        const MAX_MB = 8
+        const validFiles = Array.from(newFiles)
+            .filter(f => f.type.startsWith("image/"))
+            .filter(f => f.size <= MAX_MB * 1024 * 1024)
+            .slice(0, 3)
+
+        if (validFiles.length === 0) {
+            alert(`Please upload up to 3 images under ${MAX_MB}MB each.`)
+            return
+        }
 
         setFiles(validFiles)
         setIsAnalyzing(true)
@@ -62,9 +70,21 @@ export default function AnalyzePage() {
     }, [])
 
     const copyToClipboard = async (text: string, index: number) => {
-        await navigator.clipboard.writeText(text)
-        setCopiedToken(index)
-        setTimeout(() => setCopiedToken(null), 2000)
+        try {
+            await navigator.clipboard.writeText(text)
+            setCopiedToken(index)
+            setTimeout(() => setCopiedToken(null), 1500)
+        } catch {
+            // fallback
+            const el = document.createElement("textarea")
+            el.value = text
+            document.body.appendChild(el)
+            el.select()
+            document.execCommand("copy")
+            document.body.removeChild(el)
+            setCopiedToken(index)
+            setTimeout(() => setCopiedToken(null), 1500)
+        }
     }
 
     const handleGenerateShareCard = async () => {
@@ -245,22 +265,22 @@ export default function AnalyzePage() {
             {shareCardUrl && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-16 md:p-64">
                     <div className="absolute inset-0 bg-glass-dark backdrop-blur-3xl" onClick={() => setShareCardUrl(null)} />
-                    <GlassPanelMotion isOpen={!!shareCardUrl} className="relative z-10 w-full max-w-5xl bg-white rounded-xl overflow-hidden shadow-float">
+                    <GlassPanelMotion isOpen={!!shareCardUrl} className="relative z-10 w-full max-w-5xl bg-secondary rounded-xl overflow-hidden shadow-float border border-border">
                         <div className="bg-secondary p-[24px] flex items-center justify-between border-b border-border">
                             <h3 className="text-h2 font-medium">Your Share Card</h3>
                             <button onClick={() => setShareCardUrl(null)} className="text-muted hover:text-primary transition-colors">Close</button>
                         </div>
 
-                        <div className="p-[32px] bg-secondary flex justify-center items-center">
+                        <div className="p-[32px] bg-glass-light flex justify-center items-center">
                             <img src={shareCardUrl} alt="Generated StyleCard" className="max-w-full rounded-lg shadow-glass" />
                         </div>
 
-                        <div className="p-[24px] bg-white flex justify-end gap-16">
+                        <div className="p-[24px] bg-secondary border-t border-border flex justify-end gap-16">
                             <PillButton variant="secondary" onClick={handleShareOnX} className="flex items-center gap-8">
                                 <Share className="w-4 h-4" /> Share on X
                             </PillButton>
                             <a href={shareCardUrl} download="stylecard-dna.png">
-                                <PillButton variant="primary" className="flex items-center gap-8">
+                                <PillButton variant="primary" className="flex items-center gap-8 border border-black/10">
                                     <Download className="w-4 h-4" /> Download PNG
                                 </PillButton>
                             </a>
